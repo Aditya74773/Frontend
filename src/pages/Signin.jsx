@@ -1,0 +1,124 @@
+import React, { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { loginSuccessful } from '../redux/slices/userSlice';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
+//all hooks in react start with "use"
+const Signin = () => {
+
+  const dispatch = useDispatch();
+
+  // const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [err, setError] = useState(null)
+
+  console.log(email, password);
+  const navigate = useNavigate();
+  //funtion to signup user
+  const handleSignin = async (e) => {
+    e.preventDefault(); // stop page reload
+
+
+    try {
+      setLoading(true);
+      setError
+      const res = await axios.post(
+        "http://localhost:4000/api/login",
+        {
+          
+          email,
+          password
+        },
+        {
+        withCredentials: true
+        }
+      );
+      console.log("Signin response from the signin api:", res.data);
+      //redirecting to signin page after successful signin
+      if (res.data.user) {
+        dispatch(loginSuccessful(res.data.user));
+        navigate("/");
+      }
+
+      // sorting the error message from bacnend response
+      if (!res.data.user) {
+        setError(res.data.message)
+      }
+      setLoading(false);
+
+      console.log(res.data);
+
+    } catch (err) {
+      console.log("Error while signup", err.message);
+      setLoading(false);
+      setError("All fields are required ")
+    }
+  };
+
+  return (
+    <div className="flex justify-center gap-20 items-center min-h-screen">
+
+      {/* Signup form */}
+      <div>
+        <form onSubmit={handleSignin} className="flex flex-col gap-3 border-2 border-black p-16 rounded-lg">
+
+          <h1 className="text-3xl font-bold text-center">SignIn</h1>
+
+          {/* <input
+            className="text-2xl border-2 border-black p-4 outline-none rounded-lg"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+
+            placeholder="Username"
+          /> */}
+
+          <input
+            className="text-2xl border-2 border-black p-4 outline-none rounded-lg"
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <input
+            className="text-2xl border-2 border-black p-4 outline-none rounded-lg"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          <div className="flex justify-center">
+            <button className="bg-blue-500 w-32 text-xl p-2 rounded-lg cursor-pointer text-white">
+              {loading ? "Loading..." : "Signin"}
+            </button>
+          </div>
+
+          <p className="text-md text-gray-500 text-center">
+            dont have an account?{' '}
+            <NavLink to="/Signup" className="text-blue-600 cursor-pointer">
+              Create account
+            </NavLink>
+          </p>
+          <p className="font-semibold text-red-500 text-center">{err ? err : null}</p>
+        </form>
+      </div>
+
+      {/* LinkedIn Logo */}
+      <div>
+        <img
+          className="w-96"
+src="https://freelogopng.com/images/all_img/1656958733linkedin-logo-png.png"
+          alt="linkedin_logo"
+        />
+      </div>
+
+    </div>
+  );
+};
+
+export default Signin;

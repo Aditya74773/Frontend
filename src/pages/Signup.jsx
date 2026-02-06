@@ -21,7 +21,7 @@ const Signup = () => {
       setLoading(true);
       setError
       const res = await axios.post(
-        "http://localhost:4000/api/register",
+        "https://backend-smoky-sigma-70.vercel.app/api/register",
         {
           username,
           email,

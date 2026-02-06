@@ -7,7 +7,7 @@ const Feed = () => {
 
   const getAllPosts = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/api/get-Posts')
+      const response = await axios.get('https://backend-smoky-sigma-70.vercel.app/api/get-Posts')
       setPosts(response.data.posts || [])
     } catch (err) {
       console.log('err', err)

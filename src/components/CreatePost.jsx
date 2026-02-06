@@ -22,7 +22,7 @@ const CreatePost = () => {
             if(content === ""){
                 return alert("Post cannot be empty!")
             }
-            const response = await axios.post("http://localhost:4000/api/createpost",
+            const response = await axios.post("https://backend-smoky-sigma-70.vercel.app/api/createpost",
                 //body
                 {
                 content,

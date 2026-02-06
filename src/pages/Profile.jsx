@@ -27,7 +27,7 @@ const Profile = () => {
       e.preventDefault();
       // api call to update profile
 
-     const response = await axios.post("http://localhost:4000/api/createProfile",
+     const response = await axios.post("https://backend-smoky-sigma-70.vercel.app/api/createProfile",
       // req.body
         {headline, userId: currentUser._id, summary,
           experience : {

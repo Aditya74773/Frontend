@@ -1,5 +1,5 @@
 import React from "react";
-import ProfileSection from "../components/profilesection";
+import ProfileSection from "../components/Profilesection";
 import CreatePost from "../components/CreatePost";
 import Feed from "../components/feed";
 

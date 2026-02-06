@@ -24,7 +24,7 @@ const Signin = () => {
 
     try {
       setLoading(true);
-      setError
+      setError(null);
       const res = await axios.post(
         "https://backend-smoky-sigma-70.vercel.app/api/login",
         {

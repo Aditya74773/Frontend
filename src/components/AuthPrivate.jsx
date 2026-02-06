@@ -1,8 +1,12 @@
 import React from "react";
-import {Outlet,Navigate} from 'react-router-dom'
-import {useSelector} from 'react-redux'
+import { useSelector } from "react-redux";
+import { Outlet, Navigate } from "react-router-dom";
+
+
 const AuthPrivate = () => {
     const {currentUser} = useSelector((state) => state.user);
-    return currentUser ? <Outlet/> : <Navigate to = "/signin"/>
+
+    return !currentUser ? <Outlet /> : <Navigate to="/" />;
 }
-export default AuthPrivate;
+
+export default AuthPrivate;    

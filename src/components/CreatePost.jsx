@@ -5,6 +5,8 @@ import axios from "axios"
 import { IoIosSend } from 'react-icons/io'
 import {useSelector} from 'react-redux'
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
+
 const CreatePost = () => {
 
     //get currentUser value
@@ -22,11 +24,14 @@ const CreatePost = () => {
             if(content === ""){
                 return alert("Post cannot be empty!")
             }
-            const response = await axios.post("https://backend-smoky-sigma-70.vercel.app/api/createpost",
+            const response = await axios.post(`${API_BASE_URL}/api/createPost`,
                 //body
                 {
                 content,
                 author : currentUser?._id
+                },
+                {
+                    withCredentials: true
                 }
             )
             

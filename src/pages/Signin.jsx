@@ -3,6 +3,8 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { loginSuccessful } from '../redux/slices/userSlice';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 //all hooks in react start with "use"
 const Signin = () => {
 
@@ -26,7 +28,7 @@ const Signin = () => {
       setLoading(true);
       setError(null);
       const res = await axios.post(
-        "https://backend-smoky-sigma-70.vercel.app/api/login",
+        `${API_BASE_URL}/api/login`,
         {
           
           email,
@@ -100,7 +102,7 @@ const Signin = () => {
 
           <p className="text-md text-gray-500 text-center">
             dont have an account?{' '}
-            <NavLink to="/Signup" className="text-blue-600 cursor-pointer">
+            <NavLink to="/signup" className="text-blue-600 cursor-pointer">
               Create account
             </NavLink>
           </p>

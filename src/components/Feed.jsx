@@ -1,6 +1,8 @@
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { AiTwotoneLike } from "react-icons/ai";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 
 const Feed = () => {
   // state variable for posts
@@ -10,7 +12,9 @@ const Feed = () => {
 
   const getAllPosts = async () => {
     try {
-      const response = await axios.get("https://backend-smoky-sigma-70.vercel.app/api/get-Posts");
+      const response = await axios.get(`${API_BASE_URL}/api/get-Posts`, {
+        withCredentials: true,
+      });
       setPosts(response.data.posts);
     } catch (err) {
       console.log("err", err);
@@ -26,13 +30,13 @@ const Feed = () => {
       <h1 className="text-3xl text-gray-600 my-12"> Feed</h1>
       <ul className="mt-10 flex flex-col gap-6">
         {posts.map((post, idx) => (
-          <div keyn = {idx} className=" flex flex-col gap-4 w-96 border-2 border-black p-4 rounded-lg">
-            <li className="text-xs text-gray-600">
+          <li key={post._id || idx} className="flex flex-col gap-4 w-96 border-2 border-black p-4 rounded-lg list-none">
+            <p className="text-xs text-gray-600">
               Posted By : {post.author.username}
-            </li>
-            <li className="text-center font-semibold text-lg" key={idx}>
+            </p>
+            <p className="text-center font-semibold text-lg">
               {post.content}
-            </li>
+            </p>
 
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-3">
@@ -44,7 +48,7 @@ const Feed = () => {
                 <AiTwotoneLike className="text-2xl"/>
               </div>
             </div>
-          </div>
+          </li>
         ))}
       </ul>
     </div>

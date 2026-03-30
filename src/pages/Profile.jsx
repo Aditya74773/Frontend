@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import {useSelector} from 'react-redux'
 import axios from 'axios';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
+
 const Profile = () => {
   // state variables for form fields
 
@@ -27,7 +29,7 @@ const Profile = () => {
       e.preventDefault();
       // api call to update profile
 
-     const response = await axios.post("https://backend-smoky-sigma-70.vercel.app/api/createProfile",
+     const response = await axios.post(`${API_BASE_URL}/api/createProfile`,
       // req.body
         {headline, userId: currentUser._id, summary,
           experience : {
@@ -36,6 +38,9 @@ const Profile = () => {
           education : {
             schoolName, session
           },
+        },
+        {
+          withCredentials: true
         }
      );
       console.log("response", response);

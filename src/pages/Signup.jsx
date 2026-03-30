@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 //all hooks in react start with "use"
 const Signup = () => {
   const [username, setUsername] = useState("");
@@ -21,7 +23,7 @@ const Signup = () => {
       setLoading(true);
       setError(null);
       const res = await axios.post(
-        "https://backend-smoky-sigma-70.vercel.app/api/register",
+        `${API_BASE_URL}/api/register`,
         {
           username,
           email,
@@ -31,7 +33,7 @@ const Signup = () => {
       console.log("Signup response from the signup api:", res.data);
       //redirecting to signin page after successful signup
       if (res.data.user) {
-        navigate("/Signin");
+        navigate("/signin");
       }
       // sorting the error message from bacnend response
       if (!res.data.user) {
@@ -90,7 +92,7 @@ const Signup = () => {
 
           <p className="text-md text-gray-500 text-center">
             Already have an account?{' '}
-            <NavLink to="/Signin" className="text-blue-600 cursor-pointer">
+            <NavLink to="/signin" className="text-blue-600 cursor-pointer">
               Sign in
             </NavLink>
           </p>

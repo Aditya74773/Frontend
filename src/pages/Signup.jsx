@@ -14,7 +14,6 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [err, setError] = useState(null)
 
-  console.log(username, email, password);
   const navigate = useNavigate();
   //funtion to signup user
   const handleSignup = async (e) => {
@@ -46,9 +45,9 @@ const Signup = () => {
       console.log(res.data);
 
     } catch (err) {
-      console.log("Error while signup", err.message);
+      console.log("Error while signup", err?.response?.data || err.message);
       setLoading(false);
-      setError("All fields are required ")
+      setError(err?.response?.data?.message || err?.response?.data?.error || "Signup failed")
     }
   };
 

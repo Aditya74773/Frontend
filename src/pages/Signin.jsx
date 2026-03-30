@@ -19,7 +19,6 @@ const Signin = () => {
   const [loading, setLoading] = useState(false);
   const [err, setError] = useState(null)
 
-  console.log(email, password);
   const navigate = useNavigate();
   //funtion to signup user
   const handleSignin = async (e) => {
@@ -56,9 +55,9 @@ const Signin = () => {
       console.log(res.data);
 
     } catch (err) {
-      console.log("Error while signup", err.message);
+      console.log("Error while signin", err?.response?.data || err.message);
       setLoading(false);
-      setError("All fields are required ")
+      setError(err?.response?.data?.message || err?.response?.data?.error || "Signin failed")
     }
   };
 

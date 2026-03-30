@@ -2,7 +2,9 @@ import React, {useState} from 'react'
 import {useSelector} from 'react-redux'
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD
+  ? "https://backend-smoky-sigma-70.vercel.app"
+  : "http://localhost:4000");
 
 const Profile = () => {
   // state variables for form fields

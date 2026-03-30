@@ -5,7 +5,9 @@ import axios from "axios"
 import { IoIosSend } from 'react-icons/io'
 import {useSelector} from 'react-redux'
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD
+    ? "https://backend-smoky-sigma-70.vercel.app"
+    : "http://localhost:4000");
 
 const CreatePost = () => {
 

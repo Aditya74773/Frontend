@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD
+  ? "https://backend-smoky-sigma-70.vercel.app"
+  : "http://localhost:4000");
 //all hooks in react start with "use"
 const Signup = () => {
   const [username, setUsername] = useState("");

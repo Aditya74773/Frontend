@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { AiTwotoneLike } from "react-icons/ai";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD
+  ? "https://backend-smoky-sigma-70.vercel.app"
+  : "http://localhost:4000");
 
 const Feed = () => {
   // state variable for posts

@@ -47,7 +47,7 @@ const Signup = () => {
     } catch (err) {
       console.log("Error while signup", err?.response?.data || err.message);
       setLoading(false);
-      setError(err?.response?.data?.message || err?.response?.data?.error || "Signup failed")
+      setError(err?.response?.data?.error || err?.response?.data?.message || "Signup failed")
     }
   };
 

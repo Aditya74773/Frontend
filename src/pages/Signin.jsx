@@ -57,7 +57,7 @@ const Signin = () => {
     } catch (err) {
       console.log("Error while signin", err?.response?.data || err.message);
       setLoading(false);
-      setError(err?.response?.data?.message || err?.response?.data?.error || "Signin failed")
+      setError(err?.response?.data?.error || err?.response?.data?.message || "Signin failed")
     }
   };
 
